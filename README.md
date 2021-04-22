@@ -12,3 +12,21 @@
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+
+## Requirements
+In order to facilitate the execution of the backend exercises I have prepared an [`environment.yml`](./environment.yml) file to be used to install an environment with [Anaconda](https://www.continuum.io/downloads):
+
+```sh
+conda env create -f environment.yml
+```
+
+After the installation the environment should be visible via `conda info --envs`:
+
+```sh
+# conda environments:
+#
+dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
+...
+
+```
