@@ -23,7 +23,7 @@ def load_data(messages_filepath, categories_filepath):
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
 
-    # Separate categories id from values
+    # Separate `categories` id from values
     cat_id = categories.id
     cat_vals = categories.categories
 
@@ -35,7 +35,7 @@ def load_data(messages_filepath, categories_filepath):
     row = cat_vals.loc[0]
     category_colnames = row.apply(lambda x: x[0:-2])
 
-    # Rename the columns of `categories` using the previous list
+    # Rename the columns of `cat_vals` using the previous list
     cat_vals.columns = category_colnames
 
     # Iterate through the columns in cat_vals df to keep only the last character
@@ -89,12 +89,18 @@ def save_data(df, database_filename):
     # Table name
     table_name = 'DisMesCat'
 
-    # Creat engine with above parameters and load data
+    # Create engine with above parameters and load data
     engine = create_engine(full_DB_engine)
     df.to_sql(table_name, engine, index=False)
 
 
 def main():
+    """
+    Read two files with disaster response messages and categories, joins and
+    processes them, and then load them in an sqlite DB.
+
+    Takes as arguments the filepaths to the two files and the filepath to the DB
+    """
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
