@@ -96,7 +96,7 @@ def save_data(df, database_filename):
 
 def main():
     """
-    Read two files with disaster response messages and categories, joins and
+    Reads two files with disaster response messages and categories, joins and
     processes them, and then load them in an sqlite DB.
 
     Takes as arguments the filepaths to the two files and the filepath to the DB
