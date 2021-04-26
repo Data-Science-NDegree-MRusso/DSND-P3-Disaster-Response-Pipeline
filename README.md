@@ -1,6 +1,17 @@
 # Disaster Response Pipeline Project
 
-### Instructions:
+## Overview
+
+This Project is submitted as part of the Udacity Data Science Nanodegree.
+
+For it the goal is to analyze disaster data provided by a company called Figure Eight (now part of [Appen](https://appen.com/)) that is partner in the Nanodegree, and to build a model for an API that classifies disaster messages.
+
+In the [`data`](./data) folder, you'll find 2 csv files containing real messages that were sent during disaster events. The project includes a machine learning pipeline to categorize these events so that the messages could be sent to an appropriate disaster relief agency.
+
+Your project also includes a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data. 
+
+
+## Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
