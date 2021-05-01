@@ -35,6 +35,7 @@ def load_data(database_filepath):
     Returns:
         X: numpy array of features (messages)
         y: numpy array of categories
+        category_names: list of the category labels
     """
     # For this we'll use sqlite
     engine_dialect = 'sqlite:///'
@@ -52,7 +53,10 @@ def load_data(database_filepath):
     X = df.message.to_numpy()
     y = df[df.columns[4:]].to_numpy()
 
-    return X, y
+    # Get category names
+    category_names = list(df.columns[4:])
+
+    return X, y, category_names
 
 
 def tokenize(text):
@@ -87,16 +91,18 @@ def build_model():
     """
     Creates a model for NLP and text classification.
 
-    The model is built as a Pipeline, including:
-    * A vectorizer transformer
-    * A TFIDF transformer
-    * A Multi-output classifier, using a Random Forest algorythm
+    The model is built as a GridSearchCV object, including:
+    * A Pipeline composed by:
+        * A vectorizer transformer
+        * A TFIDF transformer
+        * A Multi-output classifier, using a Random Forest algorythm
+    * A set of parameters to run a Grid search optimization
 
     Args:
         none
 
     Returns:
-        pipeline: the Pipeline object
+        cv: the GridSearchCV object
     """
     #  Define Pipeline
     pipeline = Pipeline([
@@ -105,10 +111,22 @@ def build_model():
         ('clf', MultiOutputClassifier(RandomForestClassifier())),
     ])
 
-    return pipeline
+    # Define parameters
+    parameters = {
+        'vect__ngram_range': ((1, 1), (1, 2)),
+        # 'vect__max_df': (0.5, 0.75, 1.0),
+        # 'vect__max_features': (None, 5000, 10000),
+        # 'tfidf__use_idf': (True, False),
+        # 'clf__estimator__n_estimators': [50, 100, 200],
+        # 'clf__estimator__min_samples_split': [2, 3, 4]
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters)
+
+    return cv
 
 
-def evaluate_model(model, X_test, y_test):
+def evaluate_model(model, X_test, y_test, category_names):
     """
     Evaluate a model after training
 
@@ -118,6 +136,7 @@ def evaluate_model(model, X_test, y_test):
         model: Trained models
         X_test: Test feature dataset
         y_test: Test categories dataset
+        category_names: list of the category labels
 
     Returns:
         none
@@ -128,8 +147,7 @@ def evaluate_model(model, X_test, y_test):
     # Iterate
     for ind_1 in range(y_pred.shape[1]):
         print('-----------------------------------------------------------------------------------------')
-        # print('Label = ', df.columns[ind_1 + 4])
-        print('Label # ', ind_1 + 1)
+        print('Label = ', category_names[ind_1])
         c_rep = classification_report(y_test[:,ind_1], y_pred[:,ind_1], output_dict=True, zero_division=0)
         kk = list(c_rep.keys())
         for ind_2 in range(len(c_rep) - 3):
@@ -169,9 +187,7 @@ def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        # TODO make return category names
-        # X, Y, category_names = load_data(database_filepath)
-        X, Y = load_data(database_filepath)
+        X, Y, category_names = load_data(database_filepath)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
         print('Building model...')
@@ -184,12 +200,10 @@ def main():
 
         t1 = time.clock() - t0
 
-        print('Done. Elapsed time: ', t1)
+        print('Done. Elapsed time: ', t1, ' s')
 
         print('Evaluating model...')
-        # TODO make it use category names
-        # evaluate_model(model, X_test, Y_test, category_names)
-        evaluate_model(model, X_test, Y_test)
+        evaluate_model(model, X_test, Y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(X_train, Y_train, X_test, Y_test, model, model_filepath)
