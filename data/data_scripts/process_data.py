@@ -90,7 +90,7 @@ def save_data(df, database_filename):
     table_name = 'DisasterResponses'
 
     # Create engine with above parameters and load data
-    engine = create_engine(full_DB_engine)
+    engine = create_engine(full_DB_engine_path)
     df.to_sql(table_name, engine, index=False)
 
 

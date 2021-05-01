@@ -1,44 +1,198 @@
 import sys
+import pandas as pd
+import numpy as np
+from sqlalchemy import create_engine
+from matplotlib import pyplot as plt
 
+import re
+import pickle
+import time
+
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.metrics import classification_report, confusion_matrix
+
+nltk.download('punkt');
+nltk.download('stopwords');
+nltk.download('wordnet');
 
 def load_data(database_filepath):
-    pass
+    """
+    Loads a dataset of disaster response messages and categories, from an SQL DB
+
+    Args:
+        database_filepath (str): file path for the DB
+
+    Returns:
+        X: numpy array of features (messages)
+        y: numpy array of categories
+    """
+    # For this we'll use sqlite
+    engine_dialect = 'sqlite:///'
+    full_DB_engine_path = engine_dialect + database_filepath
+
+    # Full SQL query, assuming Table name
+    table_name = 'DisasterResponses'
+    full_query = ('SELECT * FROM ' + table_name)
+
+    # Create engine with above parameters and load data in a DataFrame
+    engine = create_engine(full_DB_engine_path)
+    df = pd.read_sql(full_query, engine)
+
+    # Get features and labes from DataFrame
+    X = df.message.to_numpy()
+    y = df[df.columns[4:]].to_numpy()
+
+    return X, y
 
 
 def tokenize(text):
-    pass
+    """
+    Cleans and tokenizes a text.
+
+    An input string is converted to lower case and punctuation is removed.
+    After that tokens are identified through the NLTK tokenizer.
+    Finally a lemmatizer reduces the tokens that are  not stop words to their
+    root form
+
+    Args:
+        text (str): the text to process
+
+    Returns:
+        tokens: the list of processed tokens
+    """
+    # Normalize case and remove punctuation
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
+
+    # Tokenize text
+    tokens_raw = word_tokenize(text)
+
+    # Lemmatize and remove stop words
+    tokens = [WordNetLemmatizer().lemmatize(word) for word in tokens_raw if
+        (word not in stopwords.words('english'))]
+
+    return tokens
 
 
 def build_model():
-    pass
+    """
+    Creates a model for NLP and text classification.
+
+    The model is built as a Pipeline, including:
+    * A vectorizer transformer
+    * A TFIDF transformer
+    * A Multi-output classifier, using a Random Forest algorythm
+
+    Args:
+        none
+
+    Returns:
+        pipeline: the Pipeline object
+    """
+    #  Define Pipeline
+    pipeline = Pipeline([
+        ('vect', CountVectorizer(tokenizer=tokenize)),
+        ('tfidf', TfidfTransformer()),
+        ('clf', MultiOutputClassifier(RandomForestClassifier())),
+    ])
+
+    return pipeline
 
 
-def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+def evaluate_model(model, X_test, y_test):
+    """
+    Evaluate a model after training
+
+    First used the model to predict data and then shows metrics
+
+    Args:
+        model: Trained models
+        X_test: Test feature dataset
+        y_test: Test categories dataset
+
+    Returns:
+        none
+    """
+    # Predict on test data
+    y_pred = model.predict(X_test)
+
+    # Iterate
+    for ind_1 in range(y_pred.shape[1]):
+        print('-----------------------------------------------------------------------------------------')
+        # print('Label = ', df.columns[ind_1 + 4])
+        print('Label # ', ind_1 + 1)
+        c_rep = classification_report(y_test[:,ind_1], y_pred[:,ind_1], output_dict=True, zero_division=0)
+        kk = list(c_rep.keys())
+        for ind_2 in range(len(c_rep) - 3):
+            print('Value = ', kk[ind_2], ': precision = ', "{:.2f}".format(c_rep[kk[ind_2]]['precision']),
+                '; recall = ', "{:.2f}".format(c_rep[kk[ind_2]]['recall']),
+                '; f1-s =', "{:.2f}".format(c_rep[kk[ind_2]]['f1-score']),
+                '; support =', c_rep[kk[ind_2]]['support'])
 
 
-def save_model(model, model_filepath):
-    pass
+def save_model(X_train, X_test, y_train, y_test, model, model_filepath):
+    """
+    saves model and data in a pickle file
+
+    Args:
+        X_train: train feature dataset
+        X_test: Test feature dataset
+        y_train: Train categories dataset
+        y_test: Test categories dataset
+        model: Trained models
+        model_filepath: Path to the pickle file
+
+    Returns:
+        none
+    """
+    # Create dictionary for pickle file
+    model_dict = {'X_train':X_train,
+                    'y_train':y_train,
+                    'X_test':X_test,
+                    'y_test':y_test,
+                    'model':model}
+
+    # Save dictionary
+    pickle.dump(model_dict, open(model_filepath, 'wb'))
 
 
 def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        X, Y, category_names = load_data(database_filepath)
+        # TODO make return category names
+        # X, Y, category_names = load_data(database_filepath)
+        X, Y = load_data(database_filepath)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
-        
+
         print('Building model...')
         model = build_model()
-        
+
+        t0= time.clock()
+
         print('Training model...')
         model.fit(X_train, Y_train)
-        
+
+        t1 = time.clock() - t0
+
+        print('Done. Elapsed time: ', t1)
+
         print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
+        # TODO make it use category names
+        # evaluate_model(model, X_test, Y_test, category_names)
+        evaluate_model(model, X_test, Y_test)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
-        save_model(model, model_filepath)
+        save_model(X_train, Y_train, X_test, Y_test, model, model_filepath)
 
         print('Trained model saved!')
 
