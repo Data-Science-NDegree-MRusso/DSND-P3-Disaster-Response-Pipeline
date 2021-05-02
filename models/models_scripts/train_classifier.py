@@ -123,7 +123,7 @@ def build_model():
 
     cv = GridSearchCV(pipeline, param_grid=parameters)
 
-    return cv
+    return pipeline
 
 
 def evaluate_model(model, X_test, y_test, category_names):
@@ -145,16 +145,17 @@ def evaluate_model(model, X_test, y_test, category_names):
     y_pred = model.predict(X_test)
 
     # Iterate
-    for ind_1 in range(y_pred.shape[1]):
-        print('-----------------------------------------------------------------------------------------')
-        print('Label = ', category_names[ind_1])
-        c_rep = classification_report(y_test[:,ind_1], y_pred[:,ind_1], output_dict=True, zero_division=0)
-        kk = list(c_rep.keys())
-        for ind_2 in range(len(c_rep) - 3):
-            print('Value = ', kk[ind_2], ': precision = ', "{:.2f}".format(c_rep[kk[ind_2]]['precision']),
-                '; recall = ', "{:.2f}".format(c_rep[kk[ind_2]]['recall']),
-                '; f1-s =', "{:.2f}".format(c_rep[kk[ind_2]]['f1-score']),
-                '; support =', c_rep[kk[ind_2]]['support'])
+    with open("Output.txt", "w") as text_file:
+        for ind_1 in range(y_pred.shape[1]):
+            print('-----------------------------------------------------------------------------------------', file=text_file)
+            print('Label = ', category_names[ind_1], file=text_file)
+            c_rep = classification_report(y_test[:,ind_1], y_pred[:,ind_1], output_dict=True, zero_division=0)
+            kk = list(c_rep.keys())
+            for ind_2 in range(len(c_rep) - 3):
+                print('Value = ', kk[ind_2], ': precision = ', "{:.2f}".format(c_rep[kk[ind_2]]['precision']),
+                    '; recall = ', "{:.2f}".format(c_rep[kk[ind_2]]['recall']),
+                    '; f1-s =', "{:.2f}".format(c_rep[kk[ind_2]]['f1-score']),
+                    '; support =', c_rep[kk[ind_2]]['support'], file=text_file)
 
 
 def save_model(X_train, X_test, y_train, y_test, model, model_filepath):
