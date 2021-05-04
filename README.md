@@ -35,9 +35,9 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
     - To run ETL pipeline that cleans data and stores in database:
         `python data/process_data.py data/data_files/disaster_messages.csv data/data_files/disaster_categories.csv {path to database file}`
     - To run ML pipeline that trains classifier and saves a pickle file:
-        `python models/train_classifier.py {path to database file} {path to model file}`
+        `python models/train_classifier.py _{path to database file}_ _{path to model file}_`
     - To run the web app: 
-        `python app/run.py {path to database file} {path to model file}``
+        `python app/run.py _{path to database file}_ _{path to model file}_`
 
 2. To see the webapp got to http://0.0.0.0:3001/
 
