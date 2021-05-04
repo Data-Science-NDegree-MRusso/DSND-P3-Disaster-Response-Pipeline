@@ -30,11 +30,11 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
 
 
 ## Instructions
-The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./notebooks) folder and a set of scripts. 
+The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./notebooks) folder) and a three scripts. 
 
 * The notebooks are provided as guidelines/references for the scripts. They do not need to be ran to execute the webapp:
     - [`ETL Pipeline Preparation`](./notebooks/ETL_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
-    - [`ML_Pipeline_Preparation`](./notebooks/ML_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the DB generated previously and train a classifier on them;
+    - [`ML_Pipeline_Preparation`](./notebooks/ML_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the DB generated previously and train a classifier on them.
 
 * In order to run use the scripts to set up your database and model, and to run the app, execute the following commands in the project's root directory:
 
