@@ -29,7 +29,7 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
 ```
 
 
-## Instructions:
+## Instructions
 1. Run the following commands in the project's root directory to set up your database and model, and to run the app:
 
     - To run ETL pipeline that cleans data and stores in database:
