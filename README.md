@@ -30,6 +30,11 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
 
 
 ## Instructions
+The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./notebooks) folder and a set of scripts. 
+
+* The notebooks are provided as guidelines/references for the scripts. They do not need to be ran to execute the webapp:
+    - [`ETL Pipeline Preparation`](./notebooks/ETL Pipeline Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
+
 1. Run the following commands in the project's root directory to set up your database and model, and to run the app:
 
     - To run ETL pipeline that cleans data and stores in database:
