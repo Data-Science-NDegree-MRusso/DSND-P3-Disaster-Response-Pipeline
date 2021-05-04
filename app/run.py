@@ -1,48 +1,85 @@
 import json
 import plotly
 import pandas as pd
+import re
+import sys
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-from sklearn.externals import joblib
+# NOTE: the following line was part if the original file but joblib has been
+# deprecated in sklearn.externals starting from scikit-learn version 0.21.
+# Instead it gets now imported directly
+# from sklearn.externals import joblib
+import joblib
 from sqlalchemy import create_engine
 
+# nltk.download('stopwords');
 
 app = Flask(__name__)
+# app.config['db_path'] = '../data/data_db/DisasterReponses2.db' #sys.argv[1]
+# app.config['model_path'] = '../models/models_files/random_forest_pipeline_1.pickle' #sys.argv[2]
+app.config['db_path'] = sys.argv[1]
+app.config['model_path'] = sys.argv[2]
+
 
 def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+    """
+    Cleans and tokenizes a text.
 
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    An input string is converted to lower case and punctuation is removed.
+    After that tokens are identified through the NLTK tokenizer.
+    Finally a lemmatizer reduces the tokens that are  not stop words to their
+    root form
 
-    return clean_tokens
+    Args:
+        text (str): the text to process
+
+    Returns:
+        tokens: the list of processed tokens
+    """
+    # Normalize case and remove punctuation
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
+
+    # Tokenize text
+    tokens_raw = word_tokenize(text)
+
+    # Lemmatize and remove stop words
+    tokens = [WordNetLemmatizer().lemmatize(word) for word in tokens_raw if
+        (word not in stopwords.words('english'))]
+
+    return tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+# For this we'll use sqlite
+engine_dialect = 'sqlite:///'
+full_DB_engine_path = engine_dialect + app.config['db_path']
+
+# Assuming Table name
+table_name = 'DisasterResponses'
+# Create engine with above parameters and load data in a DataFrame
+engine = create_engine(full_DB_engine_path)
+df = pd.read_sql_table(table_name, engine)
+
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
-
+model_dict = joblib.load(app.config['model_path'])
+model = model_dict['pipeline']
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
-    
+
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -65,11 +102,11 @@ def index():
             }
         }
     ]
-    
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    
+
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
@@ -78,13 +115,13 @@ def index():
 @app.route('/go')
 def go():
     # save user input in query
-    query = request.args.get('query', '') 
+    query = request.args.get('query', '')
 
     # use model to predict classification for query
     classification_labels = model.predict([query])[0]
     classification_results = dict(zip(df.columns[4:], classification_labels))
 
-    # This will render the go.html Please see that file. 
+    # This will render the go.html Please see that file.
     return render_template(
         'go.html',
         query=query,
