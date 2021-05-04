@@ -38,6 +38,8 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
         `python models/train_classifier.py` _`{path to database file}`_ _`{path to model file}`_
     - To run the web app: 
         `python app/run.py` _`{path to database file}`_ _`{path to model file}`_
+    
+**NOTE**: a database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. The DB includes a single table called `DisasterResponses`.
 
 2. To see the webapp in your browser go to http://0.0.0.0:3001/
 
