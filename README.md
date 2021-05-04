@@ -33,9 +33,10 @@ dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
 The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./notebooks) folder and a set of scripts. 
 
 * The notebooks are provided as guidelines/references for the scripts. They do not need to be ran to execute the webapp:
-    - [`ETL Pipeline Preparation`](./notebooks/ETL Pipeline Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
+    - [`ETL Pipeline Preparation`](./notebooks/ETL_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
+    - [`ML_Pipeline_Preparation`](./notebooks/ML_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the DB generated previously and train a classifier on them;
 
-1. Run the following commands in the project's root directory to set up your database and model, and to run the app:
+* In order to run use the scripts to set up your database and model, and to run the app, execute the following commands in the project's root directory:
 
     - To run ETL pipeline that cleans data and stores in database:
         `python data/process_data.py data/data_files/disaster_messages.csv data/data_files/disaster_categories.csv` _`{path to database file}`_;
@@ -44,7 +45,7 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     - To run the web app: 
         `python app/run.py` _`{path to database file}`_ _`{path to model file}`_
 
-2. To see the webapp in your browser go to http://0.0.0.0:3001/ .
+* To see the webapp in your browser go to http://0.0.0.0:3001/ .
     
 **NOTE**: a database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. The DB includes a single table called `DisasterResponses`.
 
