@@ -69,7 +69,7 @@ if len(sys.argv) == 3:
 
     # Load model
     model_dict = joblib.load(model_filepath)
-    model = model_dict['pipeline']
+    model = model_dict['model']
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
