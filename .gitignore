@@ -1,4 +1,7 @@
+# Don't track content of these folders
 lessons
-.pkl
-.pickle
 .ipynb_checkpoints
+
+# Don't track files with this extension
+*.pkl
+*.pickle
