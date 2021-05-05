@@ -128,6 +128,12 @@ def go():
         classification_result=classification_results
     )
 
+#Custom error route
+#Documentation available at https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 def main():
     if len(sys.argv) == 3:
