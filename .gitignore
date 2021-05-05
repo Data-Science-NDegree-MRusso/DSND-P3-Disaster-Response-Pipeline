@@ -1,4 +1,4 @@
 lessons
-models_files
-data_db
+.pkl
+.pickle
 .ipynb_checkpoints

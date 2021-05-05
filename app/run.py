@@ -20,13 +20,6 @@ from sqlalchemy import create_engine
 
 # nltk.download('stopwords');
 
-app = Flask(__name__)
-# app.config['db_path'] = '../data/data_db/DisasterReponses2.db' #sys.argv[1]
-# app.config['model_path'] = '../models/models_files/random_forest_pipeline_1.pickle' #sys.argv[2]
-app.config['db_path'] = sys.argv[1]
-app.config['model_path'] = sys.argv[2]
-
-
 def tokenize(text):
     """
     Cleans and tokenizes a text.
@@ -54,21 +47,29 @@ def tokenize(text):
 
     return tokens
 
-# load data
-# For this we'll use sqlite
-engine_dialect = 'sqlite:///'
-full_DB_engine_path = engine_dialect + app.config['db_path']
+# Define flask app
+app = Flask(__name__)
 
-# Assuming Table name
-table_name = 'DisasterResponses'
-# Create engine with above parameters and load data in a DataFrame
-engine = create_engine(full_DB_engine_path)
-df = pd.read_sql_table(table_name, engine)
+if len(sys.argv) == 3:
+    # Read files paths
+    database_filepath, model_filepath = sys.argv[1:]
+
+    # Load data
+    # For this we'll use sqlite
+    engine_dialect = 'sqlite:///'
+    # full_DB_engine_path = engine_dialect + app.config['db_path']
+    full_DB_engine_path = engine_dialect + database_filepath
+
+    # Assuming Table name
+    table_name = 'DisasterResponses'
+    # Create engine with above parameters and load data in a DataFrame
+    engine = create_engine(full_DB_engine_path)
+    df = pd.read_sql_table(table_name, engine)
 
 
-# load model
-model_dict = joblib.load(app.config['model_path'])
-model = model_dict['pipeline']
+    # Load model
+    model_dict = joblib.load(model_filepath)
+    model = model_dict['pipeline']
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -110,7 +111,6 @@ def index():
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
-
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
@@ -130,7 +130,13 @@ def go():
 
 
 def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    if len(sys.argv) == 3:
+        app.run(host='0.0.0.0', port=3001, debug=True)
+    else:
+        print('Please provide the filepath of the disaster messages database '\
+              'as the first argument and the filepath of the pickle file to '\
+              'save the model to as the second argument. \nExample: python '\
+              'run.py ../data/DisasterResponse.db classifier.pkl')
 
 
 if __name__ == '__main__':
