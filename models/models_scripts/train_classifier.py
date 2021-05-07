@@ -214,7 +214,7 @@ def main():
         t0= time.clock()
         model.fit(X_train, Y_train)
         t1 = time.clock() - t0
-        print('Done. Elapsed time: ', t1, ' s')
+        print('Done. Elapsed time = ', '{:.2f}'.format(t1))
 
         if len(sys.argv) == 4:
             report_file_path = sys.argv[3]
