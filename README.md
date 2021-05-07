@@ -36,7 +36,7 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     - [`ETL Pipeline Preparation`](./notebooks/ETL_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
     - [`ML_Pipeline_Preparation`](./notebooks/ML_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the DB generated previously and train a classifier on them.
 
-* In order to use the scripts to set up the database and model, you'll need to execute the following commands in the project's root directory:
+* In order to use the scripts to set up the database and the model, you'll need to execute the following commands in the project's root directory:
     - To run an ETL pipeline that cleans data and stores in database you'll need to run [`process_data.py`](./data/data_scripts/process_data.py):  
         `python data/data_scripts/process_data.py data/data_files/disaster_messages.csv data/data_files/disaster_categories.csv` _`{path to database file}`_;
     - To run a ML pipeline that trains a classifier, saves it in a pickle file and also saves a `.txt` file containing an evaluation report based on [`sklearn classification_report()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) you'll need to run [`train_classifier.py`](./models/models_scripts/train_classifier.py):  
@@ -47,7 +47,9 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
 * Finally, to run the webapp execute [`run.py`](./app/run.py) with the following command from the root directory:  
         `python app/run.py` _`{path to database file}`_ _`{path to model file}`_
 
-* To see the webapp in your browser go to http://0.0.0.0:3001/ .
+* To see the webapp in your browser go to http://0.0.0.0:3001/ . From the page you'll be able to:
+    - See some stastics regarding the dataset;
+    - Type a new message and run the classifier against it.  
     
 ## Results
 * A database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. The DB includes a single table called `DisasterResponses`.
@@ -55,6 +57,22 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
 * An evaluation report for the model is available in [`models/models_files`](./models/models_files) 
 
 All files where generated with the scripts above, and can be used to run the webapp.
+
+A **note** on performances: as it can be seen in the `build_model()` function that is part of the [`train_classifier.py`](./models/models_scripts/train_classifier.py) script (lines 87-123), the model to be trained is actually a [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) object, that iterates over a grid of parameters - see lines 111-119:
+
+```
+# Define parameters
+parameters = {
+    # 'vect__ngram_range': ((1, 1), (1, 2)),
+    'vect__max_df': (0.5, 0.75, 1.0),
+    # 'vect__max_features': (None, 5000, 10000),
+    'tfidf__use_idf': (True, False),
+    # 'clf__estimator__n_estimators': [50, 100, 200],
+    'clf__estimator__min_samples_split': [2, 3, 4]
+}
+```
+
+As it can be seen, some of the possible parameters and their ranges are ultimately commented out in the code: this is because training a multi-output classifier like this on the full list proved out to be _extremely_ time-consuming. After a few tries I decided to settle for the uncommented ones: I cannot say that I have seen a marked improvement in performance overall, but it does illustrate the possibility to optimize every step of ML pipeline, given thet we manipulate parameters for the transformers as well as the classifier.
 
 ## License
  <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
