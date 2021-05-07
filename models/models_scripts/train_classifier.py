@@ -210,13 +210,10 @@ def main():
         print('Building model...')
         model = build_model()
 
-        t0= time.clock()
-
         print('Training model...')
+        t0= time.clock()
         model.fit(X_train, Y_train)
-
         t1 = time.clock() - t0
-
         print('Done. Elapsed time: ', t1, ' s')
 
         if len(sys.argv) == 4:

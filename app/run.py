@@ -76,13 +76,18 @@ if len(sys.argv) == 3:
 @app.route('/index')
 def index():
 
+    # extract number of messages
+    num_messages = df.shape[0]
+
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
+    # extract/count the 10 most relevant categories
+    cat_vals =  df[df==1][list(df.columns[4:])].sum().sort_values(ascending=False)[:10].values
+    cat_names =  df[df==1][list(df.columns[4:])].sum().sort_values(ascending=False)[:10].index.values
+
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -101,6 +106,25 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+
+        {
+            'data': [
+                Bar(
+                    x=cat_names,
+                    y=cat_vals
+                )
+            ],
+
+            'layout': {
+                'title': 'Top 10 Represented Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
         }
     ]
 
@@ -109,7 +133,12 @@ def index():
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
     # render web page with plotly graphs
-    return render_template('master.html', ids=ids, graphJSON=graphJSON)
+    return render_template(
+        'master.html',
+        num_messages=num_messages,
+        ids=ids,
+        graphJSON=graphJSON
+    )
 
 # web page that handles user query and displays model results
 @app.route('/go')
