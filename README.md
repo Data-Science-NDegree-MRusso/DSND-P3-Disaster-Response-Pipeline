@@ -23,7 +23,7 @@ After the installation the environment should be visible via `conda info --envs`
 ```sh
 # conda environments:
 #
-dsnd-webdev        /usr/local/anaconda3/envs/dsnd-proj3
+dsnd-proj3        /usr/local/anaconda3/envs/dsnd-proj3
 ...
 
 ```
