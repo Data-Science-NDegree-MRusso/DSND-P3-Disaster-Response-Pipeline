@@ -54,7 +54,7 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     
 ## Results
 * A database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. The DB includes a single table called `DisasterResponses`.
-* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing), given its size (~1GB).
+* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing), as `cv_trained_model.pkl` given its size (~1GB).
 * An evaluation report for the model is available in [`models/models_files`](./models/models_files) 
 
 All files where generated with the scripts above, and can be used to run the webapp.
