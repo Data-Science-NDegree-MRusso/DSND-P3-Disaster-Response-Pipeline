@@ -1,0 +1,146 @@
+-----------------------------------------------------------------------------------------
+Date and time when this report was generated:  2021-05-09 15:20:15.484902
+-----------------------------------------------------------------------------------------
+Label =  related
+Value =  0 : precision =  0.72 ; recall =  0.43 ; f1-s = 0.54 ; support = 1185
+Value =  1 : precision =  0.85 ; recall =  0.95 ; f1-s = 0.89 ; support = 4014
+Value =  2 : precision =  0.26 ; recall =  0.31 ; f1-s = 0.29 ; support = 45
+-----------------------------------------------------------------------------------------
+Label =  request
+Value =  0 : precision =  0.90 ; recall =  0.98 ; f1-s = 0.94 ; support = 4357
+Value =  1 : precision =  0.83 ; recall =  0.48 ; f1-s = 0.61 ; support = 887
+-----------------------------------------------------------------------------------------
+Label =  offer
+Value =  0 : precision =  1.00 ; recall =  1.00 ; f1-s = 1.00 ; support = 5225
+Value =  1 : precision =  0.00 ; recall =  0.00 ; f1-s = 0.00 ; support = 19
+-----------------------------------------------------------------------------------------
+Label =  aid_related
+Value =  0 : precision =  0.80 ; recall =  0.84 ; f1-s = 0.82 ; support = 3052
+Value =  1 : precision =  0.76 ; recall =  0.71 ; f1-s = 0.73 ; support = 2192
+-----------------------------------------------------------------------------------------
+Label =  medical_help
+Value =  0 : precision =  0.93 ; recall =  1.00 ; f1-s = 0.96 ; support = 4843
+Value =  1 : precision =  0.61 ; recall =  0.08 ; f1-s = 0.14 ; support = 401
+-----------------------------------------------------------------------------------------
+Label =  medical_products
+Value =  0 : precision =  0.95 ; recall =  1.00 ; f1-s = 0.98 ; support = 4973
+Value =  1 : precision =  0.79 ; recall =  0.11 ; f1-s = 0.20 ; support = 271
+-----------------------------------------------------------------------------------------
+Label =  search_and_rescue
+Value =  0 : precision =  0.97 ; recall =  1.00 ; f1-s = 0.99 ; support = 5091
+Value =  1 : precision =  0.67 ; recall =  0.05 ; f1-s = 0.10 ; support = 153
+-----------------------------------------------------------------------------------------
+Label =  security
+Value =  0 : precision =  0.98 ; recall =  1.00 ; f1-s = 0.99 ; support = 5159
+Value =  1 : precision =  0.50 ; recall =  0.01 ; f1-s = 0.02 ; support = 85
+-----------------------------------------------------------------------------------------
+Label =  military
+Value =  0 : precision =  0.97 ; recall =  1.00 ; f1-s = 0.98 ; support = 5072
+Value =  1 : precision =  0.57 ; recall =  0.05 ; f1-s = 0.09 ; support = 172
+-----------------------------------------------------------------------------------------
+Label =  child_alone
+Value =  0 : precision =  1.00 ; recall =  1.00 ; f1-s = 1.00 ; support = 5244
+-----------------------------------------------------------------------------------------
+Label =  water
+Value =  0 : precision =  0.96 ; recall =  0.99 ; f1-s = 0.98 ; support = 4898
+Value =  1 : precision =  0.83 ; recall =  0.40 ; f1-s = 0.54 ; support = 346
+-----------------------------------------------------------------------------------------
+Label =  food
+Value =  0 : precision =  0.95 ; recall =  0.98 ; f1-s = 0.97 ; support = 4645
+Value =  1 : precision =  0.83 ; recall =  0.61 ; f1-s = 0.70 ; support = 599
+-----------------------------------------------------------------------------------------
+Label =  shelter
+Value =  0 : precision =  0.95 ; recall =  0.99 ; f1-s = 0.97 ; support = 4778
+Value =  1 : precision =  0.83 ; recall =  0.41 ; f1-s = 0.55 ; support = 466
+-----------------------------------------------------------------------------------------
+Label =  clothing
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 0.99 ; support = 5161
+Value =  1 : precision =  0.90 ; recall =  0.11 ; f1-s = 0.19 ; support = 83
+-----------------------------------------------------------------------------------------
+Label =  money
+Value =  0 : precision =  0.97 ; recall =  1.00 ; f1-s = 0.99 ; support = 5104
+Value =  1 : precision =  0.86 ; recall =  0.04 ; f1-s = 0.08 ; support = 140
+-----------------------------------------------------------------------------------------
+Label =  missing_people
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 0.99 ; support = 5177
+Value =  1 : precision =  1.00 ; recall =  0.01 ; f1-s = 0.03 ; support = 67
+-----------------------------------------------------------------------------------------
+Label =  refugees
+Value =  0 : precision =  0.97 ; recall =  1.00 ; f1-s = 0.98 ; support = 5073
+Value =  1 : precision =  0.50 ; recall =  0.01 ; f1-s = 0.01 ; support = 171
+-----------------------------------------------------------------------------------------
+Label =  death
+Value =  0 : precision =  0.96 ; recall =  1.00 ; f1-s = 0.98 ; support = 4989
+Value =  1 : precision =  0.86 ; recall =  0.15 ; f1-s = 0.25 ; support = 255
+-----------------------------------------------------------------------------------------
+Label =  other_aid
+Value =  0 : precision =  0.88 ; recall =  0.99 ; f1-s = 0.93 ; support = 4595
+Value =  1 : precision =  0.55 ; recall =  0.05 ; f1-s = 0.09 ; support = 649
+-----------------------------------------------------------------------------------------
+Label =  infrastructure_related
+Value =  0 : precision =  0.94 ; recall =  1.00 ; f1-s = 0.97 ; support = 4905
+Value =  1 : precision =  0.25 ; recall =  0.00 ; f1-s = 0.01 ; support = 339
+-----------------------------------------------------------------------------------------
+Label =  transport
+Value =  0 : precision =  0.96 ; recall =  1.00 ; f1-s = 0.98 ; support = 5014
+Value =  1 : precision =  0.78 ; recall =  0.11 ; f1-s = 0.19 ; support = 230
+-----------------------------------------------------------------------------------------
+Label =  buildings
+Value =  0 : precision =  0.96 ; recall =  1.00 ; f1-s = 0.98 ; support = 5003
+Value =  1 : precision =  0.72 ; recall =  0.14 ; f1-s = 0.24 ; support = 241
+-----------------------------------------------------------------------------------------
+Label =  electricity
+Value =  0 : precision =  0.98 ; recall =  1.00 ; f1-s = 0.99 ; support = 5150
+Value =  1 : precision =  0.86 ; recall =  0.06 ; f1-s = 0.12 ; support = 94
+-----------------------------------------------------------------------------------------
+Label =  tools
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 1.00 ; support = 5210
+Value =  1 : precision =  0.00 ; recall =  0.00 ; f1-s = 0.00 ; support = 34
+-----------------------------------------------------------------------------------------
+Label =  hospitals
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 0.99 ; support = 5190
+Value =  1 : precision =  0.00 ; recall =  0.00 ; f1-s = 0.00 ; support = 54
+-----------------------------------------------------------------------------------------
+Label =  shops
+Value =  0 : precision =  1.00 ; recall =  1.00 ; f1-s = 1.00 ; support = 5222
+Value =  1 : precision =  0.00 ; recall =  0.00 ; f1-s = 0.00 ; support = 22
+-----------------------------------------------------------------------------------------
+Label =  aid_centers
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 0.99 ; support = 5177
+Value =  1 : precision =  0.00 ; recall =  0.00 ; f1-s = 0.00 ; support = 67
+-----------------------------------------------------------------------------------------
+Label =  other_infrastructure
+Value =  0 : precision =  0.96 ; recall =  1.00 ; f1-s = 0.98 ; support = 5016
+Value =  1 : precision =  0.33 ; recall =  0.00 ; f1-s = 0.01 ; support = 228
+-----------------------------------------------------------------------------------------
+Label =  weather_related
+Value =  0 : precision =  0.90 ; recall =  0.95 ; f1-s = 0.93 ; support = 3839
+Value =  1 : precision =  0.84 ; recall =  0.72 ; f1-s = 0.77 ; support = 1405
+-----------------------------------------------------------------------------------------
+Label =  floods
+Value =  0 : precision =  0.96 ; recall =  1.00 ; f1-s = 0.98 ; support = 4849
+Value =  1 : precision =  0.90 ; recall =  0.45 ; f1-s = 0.60 ; support = 395
+-----------------------------------------------------------------------------------------
+Label =  storm
+Value =  0 : precision =  0.95 ; recall =  0.99 ; f1-s = 0.97 ; support = 4767
+Value =  1 : precision =  0.80 ; recall =  0.53 ; f1-s = 0.64 ; support = 477
+-----------------------------------------------------------------------------------------
+Label =  fire
+Value =  0 : precision =  0.99 ; recall =  1.00 ; f1-s = 0.99 ; support = 5180
+Value =  1 : precision =  1.00 ; recall =  0.02 ; f1-s = 0.03 ; support = 64
+-----------------------------------------------------------------------------------------
+Label =  earthquake
+Value =  0 : precision =  0.98 ; recall =  0.99 ; f1-s = 0.98 ; support = 4758
+Value =  1 : precision =  0.88 ; recall =  0.78 ; f1-s = 0.83 ; support = 486
+-----------------------------------------------------------------------------------------
+Label =  cold
+Value =  0 : precision =  0.98 ; recall =  1.00 ; f1-s = 0.99 ; support = 5151
+Value =  1 : precision =  0.67 ; recall =  0.11 ; f1-s = 0.19 ; support = 93
+-----------------------------------------------------------------------------------------
+Label =  other_weather
+Value =  0 : precision =  0.95 ; recall =  1.00 ; f1-s = 0.97 ; support = 4971
+Value =  1 : precision =  0.57 ; recall =  0.03 ; f1-s = 0.06 ; support = 273
+-----------------------------------------------------------------------------------------
+Label =  direct_report
+Value =  0 : precision =  0.87 ; recall =  0.98 ; f1-s = 0.92 ; support = 4258
+Value =  1 : precision =  0.79 ; recall =  0.36 ; f1-s = 0.49 ; support = 986
