@@ -1,5 +1,6 @@
 # Don't track content of these folders
 lessons
+models_temp
 .ipynb_checkpoints
 
 # Don't track files with this extension
