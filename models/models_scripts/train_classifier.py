@@ -20,7 +20,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
 
 def load_data(database_filepath):
     """

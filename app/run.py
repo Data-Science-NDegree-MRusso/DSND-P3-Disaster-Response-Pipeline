@@ -18,8 +18,6 @@ from plotly.graph_objs import Bar
 import joblib
 from sqlalchemy import create_engine
 
-# nltk.download('stopwords');
-
 def tokenize(text):
     """
     Cleans and tokenizes a text.
@@ -53,23 +51,27 @@ app = Flask(__name__)
 if len(sys.argv) == 3:
     # Read files paths
     database_filepath, model_filepath = sys.argv[1:]
+else:
+    # Use default values for file paths
+    database_filepath = 'data/data_db/DisasterResponses.db'
+    model_filepath = 'models/models_files/cv_trained_model.pkl'
 
-    # Load data
-    # For this we'll use sqlite
-    engine_dialect = 'sqlite:///'
-    # full_DB_engine_path = engine_dialect + app.config['db_path']
-    full_DB_engine_path = engine_dialect + database_filepath
+# Load data
+# For this we'll use sqlite
+engine_dialect = 'sqlite:///'
+# full_DB_engine_path = engine_dialect + app.config['db_path']
+full_DB_engine_path = engine_dialect + database_filepath
 
-    # Assuming Table name
-    table_name = 'DisasterResponses'
-    # Create engine with above parameters and load data in a DataFrame
-    engine = create_engine(full_DB_engine_path)
-    df = pd.read_sql_table(table_name, engine)
+# Assuming Table name
+table_name = 'DisasterResponses'
+# Create engine with above parameters and load data in a DataFrame
+engine = create_engine(full_DB_engine_path)
+df = pd.read_sql_table(table_name, engine)
 
 
-    # Load model
-    model_dict = joblib.load(model_filepath)
-    model = model_dict['model']
+# Load model
+model_dict = joblib.load(model_filepath)
+model = model_dict['model']
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -165,13 +167,12 @@ def page_not_found(e):
 
 
 def main():
-    if len(sys.argv) == 3:
-        app.run(host='0.0.0.0', port=3001, debug=True)
-    else:
-        print('Please provide the filepath of the disaster messages database '\
-              'as the first argument and the filepath of the pickle file to '\
-              'save the model to as the second argument. \nExample: python '\
-              'run.py ../data/DisasterResponse.db classifier.pkl')
+    if len(sys.argv) == 1:
+        # Running with no arguments - Display message
+        print('WARN: No arguments provided - looking for files in default locations')
+
+    app.run(host='0.0.0.0', port=3001, debug=True)
+
 
 
 if __name__ == '__main__':
