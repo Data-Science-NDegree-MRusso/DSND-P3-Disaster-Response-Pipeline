@@ -28,6 +28,7 @@ dsnd-proj3        /usr/local/anaconda3/envs/dsnd-proj3
 
 ```
 
+Further documentation on working with Anaconda environments can be found [here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). 
 
 ## Instructions
 The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./notebooks) folder) and a three scripts. 
