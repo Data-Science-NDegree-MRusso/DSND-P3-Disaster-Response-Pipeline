@@ -72,7 +72,8 @@ parameters = {
 }
 ```
 
-As it can be seen, some of the possible parameters and their ranges are ultimately commented out in the code: this is because training a multi-output classifier like this on the full list proved out to be _extremely_ time-consuming. After a few tries I decided to settle for the uncommented ones: I cannot say that I have seen a marked improvement in performance overall, but it does illustrate the possibility to optimize every step of ML pipeline, given thet we manipulate parameters for the transformers as well as the classifier.
+As it can be seen, some of the possible parameters and their ranges are ultimately commented out in the code: this is because training a multi-output classifier like this on the full list proved out to be _extremely_ time-consuming. After a few tries I decided to settle for the uncommented ones: I cannot say that I have seen a marked improvement in performance overall, but it does illustrate the possibility to optimize every step of ML pipeline, given thet we manipulate parameters for the transformers as well as the classifier.  
+Training of this configuration required slightly more than 8 hours on an AWS-hosted, ML-specific VM. 
 
 ## License
  <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
