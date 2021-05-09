@@ -54,11 +54,20 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     
 ## Results
 * A database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. 
-    - The DB includes a single table called `DisasterResponses`. This is the name of the table expected by the code at the moment: to see where the DB is generated check the `save_data` function in [`process_data.py`](./data/data_scripts/process_data.py) (lines 74-94). To see where the data are read in check the `load_data` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 25-56).
-* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
-* An evaluation report for the model is available in [`models/models_files`](./models/models_files) as `cv_training_report.txt`.
+    - The DB includes a single table called `DisasterResponses`. This is the name of the table expected by the code at the moment: to see where the DB is generated check the `save_data` function in [`process_data.py`](./data/data_scripts/process_data.py) (lines 74-94). To see where the data are read in check the `load_data` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 25-56).  
 
-All files where generated with the scripts above, and can be used to run the webapp.
+* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
+    - The code is expecting to load from the pickle file a dictionary with specific fields:  
+        `X_train`: The datadet of features used to train the model.   
+        `X_test`: The datadet of features used to train the model.   
+        `y_train`: The datadet of labels used to train the model.   
+        `y_test`: The datadet of labels used to train the model.   
+        `model`: The actual model.   
+    - To see how the model is saved check the `save_model` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 176-199).  
+
+* An evaluation report for the model is available in [`models/models_files`](./models/models_files) as `cv_training_report.txt`.  
+
+All files where generated with the scripts above, and can be used to run the webapp.  
 
 A **note** on performances: as it can be seen in the `build_model()` function that is part of the [`train_classifier.py`](./models/models_scripts/train_classifier.py) script (lines 87-123), the model to be trained is actually a [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) object, that iterates over a grid of parameters - see lines 111-119:
 
