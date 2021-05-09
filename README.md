@@ -58,10 +58,10 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
 
 * A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
     - The code is expecting to load from the pickle file a dictionary with specific fields:  
-        `X_train`: The datadet of features used to train the model.   
-        `X_test`: The datadet of features used to train the model.   
-        `y_train`: The datadet of labels used to train the model.   
-        `y_test`: The datadet of labels used to train the model.   
+        `X_train`: The dataset of features used to train the model.   
+        `X_test`: The dataset of features used to train the model.   
+        `y_train`: The dataset of labels used to train the model.   
+        `y_test`: The dataset of labels used to train the model.   
         `model`: The actual model.   
     - To see how the model is saved check the `save_model` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 176-199).  
 
