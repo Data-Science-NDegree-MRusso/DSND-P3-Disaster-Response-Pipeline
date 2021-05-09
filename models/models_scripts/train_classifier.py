@@ -175,10 +175,10 @@ def evaluate_model(model, X_test, y_test, category_names, report_file_path=[]):
 
 def save_model(X_train, X_test, y_train, y_test, model, model_filepath):
     """
-    saves model and data in a pickle file
+    Saves model and data in a pickle file
 
     Args:
-        X_train: train feature dataset
+        X_train: Train feature dataset
         X_test: Test feature dataset
         y_train: Train categories dataset
         y_test: Test categories dataset
