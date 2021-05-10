@@ -37,16 +37,20 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     - [`ETL Pipeline Preparation`](./notebooks/ETL_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the `.csv` files and save them in an SQL-lite DB;
     - [`ML_Pipeline_Preparation`](./notebooks/ML_Pipeline_Preparation.ipynb) documents a step-by-step process to load data from the DB generated previously and train a classifier on them.
 
-* In order to use the scripts to set up the database and the model, you'll need to execute the following commands in the project's root directory:
-    - To run an ETL pipeline that cleans data and stores in database you'll need to run [`process_data.py`](./data/data_scripts/process_data.py):  
+* In order to use the scripts to set up the database and the model from the project's root directory, you'll need to use the following commands and arguments:
+    - To run the ETL pipeline that cleans data and stores in database you'll need to run [`process_data.py`](./data/data_scripts/process_data.py):  
         `python data/data_scripts/process_data.py data/data_files/disaster_messages.csv data/data_files/disaster_categories.csv` _`{path to database file}`_;
-    - To run a ML pipeline that trains a classifier, saves it in a pickle file and also saves a `.txt` file containing an evaluation report based on [`sklearn classification_report()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) you'll need to run [`train_classifier.py`](./models/models_scripts/train_classifier.py):  
+    - To run the ML pipeline that trains a classifier, saves it in a pickle file and also saves a `.txt` file containing an evaluation report based on [`sklearn classification_report()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) you'll need to run [`train_classifier.py`](./models/models_scripts/train_classifier.py):  
         `python models/models_scripts/train_classifier.py` _`{path to database file}`_ _`{path to model file}`_ _`{path to report file}`_;
     - **Note** that the last argument for the previous script is optional: if you don't define a report file the outcome of the `classification_report()` will be displayed on screen.
         
  
-* Finally, to run the webapp execute [`run.py`](./app/run.py) with the following command from the root directory:  
+* Finally, to run the webapp execute [`run.py`](./app/run.py) from the root directory you can:
+    -  Run the following command, including arguments to point to the files of your choice:  
         `python app/run.py` _`{path to database file}`_ _`{path to model file}`_
+    - Simply run:  
+        `python app/run.py`   
+        In this case the app will use two default file paths: `data/data_db/DisasterResponses.db` for the DB, `models/models_files/cv_trained_model.pkl` for the pickle file with the classifier.
 
 * To see the webapp in your browser go to http://0.0.0.0:3001/ . From the page you'll be able to:
     - See some stastics regarding the dataset;
