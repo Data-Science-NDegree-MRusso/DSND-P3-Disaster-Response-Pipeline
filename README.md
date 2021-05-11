@@ -45,11 +45,11 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
     - **Note** that the last argument for the previous script is optional: if you don't define a report file the outcome of the `classification_report()` will be displayed on screen.
         
  
-* Finally, to run the webapp execute [`run.py`](./app/run.py) from the root directory you can:
+* Finally, to run the webapp executing [`app.py`](./app/app.py) from the root directory you can:
     -  Run the following command, including arguments to point to the files of your choice:  
-        `python app/run.py` _`{path to database file}`_ _`{path to model file}`_
+        `python app/app.py` _`{path to database file}`_ _`{path to model file}`_
     - Simply run:  
-        `python app/run.py`   
+        `python app/app.py`   
         In this case the app will use two default file paths: `data/data_db/DisasterResponses.db` for the DB, `models/models_files/cv_trained_model.pkl` for the pickle file with the classifier.
 
 * To see the webapp in your browser go to http://0.0.0.0:3001/ . From the page you'll be able to:
