@@ -50,14 +50,14 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
         `python app/app.py` _`{path to database file}`_ _`{path to model file}`_
     - Simply run:  
         `python app/app.py`   
-        In this case the app will use two default file paths: `data/data_db/DisasterResponses.db` for the DB, `models/models_files/cv_trained_model.pkl` for the pickle file with the classifier.
+        In this case the app will use two default file paths: `data/data_db/disaster_responses.db` for the DB, `models/models_files/cv_trained_model.pkl` for the pickle file with the classifier.
 
 * To see the webapp in your browser go to http://0.0.0.0:3001/ . From the page you'll be able to:
     - See some stastics regarding the dataset;
     - Type a new message and run the classifier against it.  
     
 ## Results
-* A database containing the processed values is available in [`data/data_db`](./data/data_db) as `DisasterResponses.db`. 
+* A database containing the processed values is available in [`data/data_db`](./data/data_db) as `disaster_responses.db`. 
     - The DB includes a single table called `DisasterResponses`. This is the name of the table expected by the code at the moment: to see where the DB is generated check the `save_data` function in [`process_data.py`](./data/data_scripts/process_data.py) (lines 74-94). To see where the data are read in check the `load_data` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 25-56).  
 
 * A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
