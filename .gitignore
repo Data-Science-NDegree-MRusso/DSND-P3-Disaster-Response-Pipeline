@@ -6,3 +6,4 @@ models_temp
 # Don't track files with this extension
 *.pkl
 *.pickle
+*.pkz
