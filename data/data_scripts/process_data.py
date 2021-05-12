@@ -57,17 +57,22 @@ def load_data(messages_filepath, categories_filepath):
 def clean_data(df):
     """
     Cleans a dataset of disaster response messages and categories, removing all
-    duplicates.
+    duplicates and values that have no meaning.
 
     Args:
         df: DataFrame containing combined messages/categories data
 
     Returns:
         df: Cleaned DataFrame containing combined messages/categories data without
-            duplications
+            duplications and without unspecified values for the categories
     """
+    # Remove duplicated
     df = df.drop(df.index[df.duplicated()].tolist())
 
+    # The `related` column in the data frame presents values different than 0
+    # and 1, th meaning of which is unclear, so we eliminate them.
+    df = df[df.related != 2]
+    
     return df
 
 
