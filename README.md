@@ -60,7 +60,7 @@ The code in this repo includes 2 jupyter notebooks (in the [`notebooks`](./noteb
 * A database containing the processed values is available in [`data/data_db`](./data/data_db) as `disaster_responses.db`. 
     - The DB includes a single table called `DisasterResponses`. This is the name of the table expected by the code at the moment: to see where the DB is generated check the `save_data` function in [`process_data.py`](./data/data_scripts/process_data.py) (lines 74-94). To see where the data are read in check the `load_data` function in [`train_classifier.py`](./models/models_scripts/train_classifier.py) (lines 25-56).  
 
-* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1laeKEC0yin0gqBFHb2-mLAgR308N5dsw/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
+* A pickle file containing a dictionary that includes a model and the datasets used to train/test is available separatedly [here](https://drive.google.com/file/d/1fPl5RqvPeOrbMQzOmcwZAfNBE-uQiIGU/view?usp=sharing) as `cv_trained_model.pkl`, given its size (~1GB).
     - The code is expecting to load from the pickle file a dictionary with specific fields:  
         `X_train`: The dataset of features used to train the model.   
         `X_test`: The dataset of features used to train the model.   
