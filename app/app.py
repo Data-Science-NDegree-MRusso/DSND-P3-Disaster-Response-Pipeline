@@ -53,7 +53,7 @@ if len(sys.argv) == 3:
     database_filepath, model_filepath = sys.argv[1:]
 else:
     # Use default values for file paths
-    database_filepath = 'data/data_db/DisasterResponses.db'
+    database_filepath = 'data/data_db/disaster_responses.db'
     model_filepath = 'models/models_files/cv_trained_model.pkl'
 
 # Load data
@@ -150,6 +150,7 @@ def go():
 
     # use model to predict classification for query
     classification_labels = model.predict([query])[0]
+    print(classification_labels)
     classification_results = dict(zip(df.columns[4:], classification_labels))
 
     # This will render the go.html Please see that file.
