@@ -13,7 +13,7 @@ The project also includes a web app where an emergency worker can input a new me
 
 
 ## Requirements
-In order to facilitate the execution of the Notebooks and of the scripts I have prepared an [`environment.yml`](./environment.yml) file to be used to install an environment with [Anaconda](https://www.continuum.io/downloads):
+In order to facilitate the execution of the Notebooks and of the scripts I have prepared an [`environment.yml`](./environment.yml) file to be used to install an environment with [Anaconda](https://www.anaconda.com/):
 
 ```sh
 conda env create -f environment.yml
